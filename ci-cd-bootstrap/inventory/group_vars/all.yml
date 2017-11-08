@@ -32,6 +32,10 @@ openshift_cluster_content:
     template: "{{ inventory_dir }}/../../templates/jenkins-slave-pod/template.json"
     params: "{{ inventory_dir }}/../params/npm-build-pod/build_params"
     namespace: labs-ci-cd
+  - name: npm-build-pod
+    template: "{{ inventory_dir }}/../../templates/jenkins-slave-pod/template.json"
+    params: "{{ inventory_dir }}/../params/npm-build-pod/build"
+    namespace: labs-ci-cd  
 - object: ci-cd-deployments
   content:
   - name: jenkins-ephemeral
@@ -48,7 +52,17 @@ openshift_cluster_content:
     template: "{{ inventory_dir }}/../../templates/s2i-app-build/template-no-secrets.json"
     params: "{{ inventory_dir }}/../params/java-app/deploy_params"    
     namespace: labs-ci-cd
+<<<<<<< Updated upstream
 - object: app-deployments
+=======
+  - name: node-app-build
+    template: "{{ inventory_dir }}/../../templates/s2i-app-build/template-no-secrets.json"
+    params: "{{ inventory_dir }}/../params/node-app/build"    
+    namespace: labs-ci-cd  
+    tags:
+    - node-app  
+- object: dev-stage
+>>>>>>> Stashed changes
   content:
   - name: java-app
     template: "{{ inventory_dir }}/../../templates/http-app-deploy/template.json"
@@ -56,8 +70,21 @@ openshift_cluster_content:
     namespace: labs-dev
   - name: fabric8-rolebinding
     template: "{{ inventory_dir }}/../../templates/fabric8-role-bindings/template.json"
+<<<<<<< Updated upstream
     params: "{{ inventory_dir }}/../params/java-app-dev/fabric8_params"
     namespace: labs-dev  
+=======
+    params: "{{ inventory_dir }}/../params/java-app/fabric8_dev"
+    namespace: labs-dev
+  - name: node-app
+    template: "{{ inventory_dir }}/../../templates/http-app-deploy/template.json"
+    params: "{{ inventory_dir }}/../params/node-app/deploy"
+    namespace: labs-dev
+    tags:
+    - node-app  
+- object: demo-stage
+  content:
+>>>>>>> Stashed changes
   - name: java-app
     template: "{{ inventory_dir }}/../../templates/http-app-deploy/template.json"
     params: "{{ inventory_dir }}/../params/java-app-test/deploy_params"
@@ -72,5 +99,16 @@ openshift_cluster_content:
     namespace: labs-uat
   - name: fabric8-rolebinding
     template: "{{ inventory_dir }}/../../templates/fabric8-role-bindings/template.json"
+<<<<<<< Updated upstream
     params: "{{ inventory_dir }}/../params/java-app-uat/fabric8_params"
     namespace: labs-uat    
+=======
+    params: "{{ inventory_dir }}/../params/java-app/fabric8_demo"
+    namespace: labs-demo
+  - name: node-app
+    template: "{{ inventory_dir }}/../../templates/http-app-deploy/template.json"
+    params: "{{ inventory_dir }}/../params/node-app/deploy"
+    namespace: labs-demo
+    tags:
+    - node-app  
+>>>>>>> Stashed changes
